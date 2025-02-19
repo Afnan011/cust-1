@@ -1,0 +1,28 @@
+<h2>Customer Management</h2>
+
+<!-- Success/Error Feedback -->
+<div *ngIf="successMessage" class="success">
+  {{ successMessage }}
+</div>
+<div *ngIf="errorMessage" class="error">
+  {{ errorMessage }}
+</div>
+
+<!-- Form to Add Customer -->
+<input [(ngModel)]="newCustomer.name" placeholder="Name" required>
+<input [(ngModel)]="newCustomer.email" placeholder="Email" required>
+<input [(ngModel)]="newCustomer.phno" placeholder="Phone" required>
+<input [(ngModel)]="newCustomer.gender" placeholder="Gender">
+<button (click)="addCustomer()">Add Customer</button>
+
+<!-- Customer List -->
+<ul>
+  <li *ngFor="let customer of customers">
+    <input [(ngModel)]="customer.name" placeholder="Name">
+    <input [(ngModel)]="customer.email" placeholder="Email">
+    <input [(ngModel)]="customer.phno" placeholder="Phone">
+    <input [(ngModel)]="customer.gender" placeholder="Gender">
+    <button (click)="updateCustomer(customer)">Update</button>
+    <button (click)="deleteCustomer(customer.id)">Delete</button>
+  </li>
+</ul>

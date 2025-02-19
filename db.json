@@ -1,0 +1,39 @@
+{
+  "customers": [
+    {
+      "id": "1",
+      "name": "John Doeeee",
+      "email": "john@example.com",
+      "phno": "1234567890",
+      "gender": "male"
+    },
+    {
+      "id": "2",
+      "name": "Jane Doeww",
+      "email": "jane@example.com",
+      "phno": "0987654321",
+      "gender": "female"
+    },
+    {
+      "id": 0,
+      "name": "Vaishnavi",
+      "email": "vaishnavi@abc.com",
+      "phno": "111122222",
+      "gender": "female"
+    },
+    {
+      "id": 0,
+      "name": "varsha",
+      "email": "varsha@example.com",
+      "phno": "1122112211",
+      "gender": "female"
+    },
+    {
+      "id": 3,
+      "name": "aaa",
+      "email": "aaaa",
+      "phno": "1111",
+      "gender": "male"
+    }
+  ]
+}
