@@ -1,0 +1,19 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Customer List</h2>
+    <app-new-customer (customerCreated)="onCustomerCreated($event)" />
+  </div>
+  <div class="row">
+    <div class="col-12">
+      @for (customer of customers; track customer.id) {
+        <app-customer 
+          [customer]="customer" 
+          (customerDeleted)="onCustomerDeleted($event)"
+          (customerUpdated)="onCustomerUpdated($event)"
+        />
+      }
+    </div>
+  </div>
+</div>
+
+
