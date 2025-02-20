@@ -1,17 +1,24 @@
 {
   "customers": [
     {
-      "id": "1",
-      "name": "aaa",
-      "email": "aaaaaaa",
-      "phno": "11111111",
-      "gender": "male"
+      "id": "2",
+      "name": "vaishnavi",
+      "email": "bbbbbbbbb",
+      "phno": "111112345",
+      "gender": "female"
     },
     {
-      "id": "2",
-      "name": "bbbb",
-      "email": "bbbbbbbbb",
-      "phno": "22222222",
+      "id": "3",
+      "name": "cccc",
+      "email": "cccc",
+      "phno": "21234",
+      "gender": "female"
+    },
+    {
+      "id": "4",
+      "name": "hello",
+      "email": "hello@abc.com",
+      "phno": "1234567",
       "gender": "female"
     }
   ]

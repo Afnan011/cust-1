@@ -16,6 +16,9 @@ export class CustomersComponent implements OnInit{
   successMessage: string = '';
   errorMessage: string = '';
 
+  isModalOpen: boolean = false; // Controls modal visibility
+  selectedCustomer: any = {};   // Stores the customer being edited
+
   constructor(private customerService: CustomerService) {}
 
   ngOnInit(): void {
@@ -37,31 +40,47 @@ export class CustomersComponent implements OnInit{
       next: (data) => {
         this.customers.push(data);
         this.newCustomer = { id: '0', name: '', email: '', phno: '', gender: '' };
+        this.successMessage = 'Customer added successfully!';
+        console.log('Customer added');
       },
       error: (error) => console.error('Error adding customer:', error)
     });
   }
   
+  openUpdateModal(customer: any): void {
+    this.selectedCustomer = { ...customer }; // Copy the customer object
+    this.isModalOpen = true;
+  }
+
   updateCustomer(customer: any): void {
     this.customerService.updateCustomer(customer.id, customer).subscribe({
-      next: () => console.log('Customer updated'),
-      error: (error) => console.error('Error updating customer:', error)
+      next: () => {
+        const index = this.customers.findIndex((c) => c.id === customer.id);
+        this.successMessage = 'Customer updated successfully!';
+        console.log('Customer updated');
+        if (index !== -1) this.customers[index] = { ...customer };
+        this.closeModal();
+      },
+      error: (error) => console.error('Error updating customer:', error),
     });
   }
-  
+
   deleteCustomer(id: string): void {
-    console.log(this.customers);
     this.customerService.deleteCustomer(id).subscribe({
       next: () => {
-        this.customers = this.customers.filter(c => c.id !== id);
+        (this.customers = this.customers.filter((c) => c.id !== id));
         this.successMessage = 'Customer deleted successfully!';
         console.log('Customer deleted');
       },
       error: (error) => {
-        this.errorMessage = 'Error deleting customer. Please try again.';
         console.error('Error deleting customer:', error);
+        this.errorMessage = 'Error deleting customer. Please try again.';
       }
     });
   }
   
+  closeModal(): void {
+    this.isModalOpen = false;
+    this.selectedCustomer = {};
+  }
 }
