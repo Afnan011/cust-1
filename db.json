@@ -1,7 +1,7 @@
 {
   "customers": [
     {
-      "name": "Mohammed Afnan",
+      "name": "Mohammed Afnan m",
       "email": "afnan@123",
       "phone": "555-123-4568",
       "id": "88c5"
@@ -23,12 +23,6 @@
       "email": "fjdkl@jfkld.com",
       "phone": "7987979",
       "id": "0750"
-    },
-    {
-      "id": "4d9b",
-      "name": "Sudhi",
-      "email": "sudhi@anvitha.com",
-      "phone": "1234567890"
     }
   ]
 }

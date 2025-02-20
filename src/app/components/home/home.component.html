@@ -1,18 +1,39 @@
-<div class="container mt-4">
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2>Customer List</h2>
-    <app-new-customer (customerCreated)="onCustomerCreated($event)" />
+<div class="app-header">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <h2>Customer Management</h2>
+            <p class="text-white-50 mb-0">Manage your customers</p>
+          </div>
+          <app-new-customer (customerCreated)="onCustomerCreated($event)" />
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="row">
-    <div class="col-12">
-      @for (customer of customers; track customer.id) {
+</div>
+
+<div class="container">
+  <div class="row g-4">
+    @if (customers.length === 0) {
+      <div class="col-12">
+        <div class="alert alert-info text-center p-5 rounded-3">
+          <i class="bi bi-people fs-1 mb-3 d-block"></i>
+          <h4>No Customers Yet</h4>
+          <p class="mb-0 text-muted">Add your first customer to get started!</p>
+        </div>
+      </div>
+    }
+    @for (customer of customers; track customer.id) {
+      <div class="col-md-6 col-lg-4">
         <app-customer 
           [customer]="customer" 
           (customerDeleted)="onCustomerDeleted($event)"
           (customerUpdated)="onCustomerUpdated($event)"
         />
-      }
-    </div>
+      </div>
+    }
   </div>
 </div>
 

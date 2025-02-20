@@ -1,15 +1,15 @@
+<button 
+  class="btn btn-light d-flex align-items-center shadow-sm" 
+  data-bs-toggle="modal" 
+  data-bs-target="#newCustomerModal"
+>
+  <i class="bi bi-plus-circle-fill me-2"></i>
+  Add New Customer
+</button>
+
 <app-customer-modal
-      modalId="newCustomerModal"
-      title="Create New Customer"
-      submitButtonText="Create"
-      (formSubmit)="createCustomer($event)"
-    />
-    
-    <button 
-      class="btn btn-primary" 
-      data-bs-toggle="modal" 
-      data-bs-target="#newCustomerModal"
-    >
-      <i class="bi bi-plus-circle me-2"></i>
-      Add New Customer
-    </button>
+  modalId="newCustomerModal"
+  title="Create New Customer"
+  submitButtonText="Create"
+  (formSubmit)="createCustomer($event)"
+/>

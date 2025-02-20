@@ -1,8 +1,92 @@
+// Custom Variables
+$primary: #4361ee;
+$secondary: #3f37c9;
+$gradient-start: #4362eea7;
+$gradient-end: #3e37c9c0;
+$background-light: #f8f9fa;
+$border-radius: 0.5rem;
+$card-border-radius: $border-radius;
+$modal-border-radius: $border-radius;
 
+// Global styles
 body {
-    background-color: #f8f9fa;
+  background: linear-gradient(135deg, rgba($gradient-start, 0.05) 0%, rgba($gradient-end, 0.05) 100%);
+  min-height: 100vh;
 }
 
+// Header styles
+.app-header {
+  background: linear-gradient(135deg, $gradient-start 0%, $gradient-end 100%);
+  padding: 2rem 0;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  
+  h2 {
+    color: white;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// Custom Utilities
+.transition-all {
+  transition: all 0.3s ease;
+}
+
+.hover-shadow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+// Custom Component Styles
 .card {
-    border: none;
+  border: none;
+  background: white;
+  transition: all 0.3s ease;
+  border-radius: 1rem;
+  overflow: hidden;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(67, 97, 238, 0.1);
+  }
+}
+
+.modal-content {
+  border: none;
+}
+
+.form-control:focus {
+  border-color: $primary;
+  box-shadow: 0 0 0 0.25rem rgba($primary, 0.25);
+}
+
+// Custom Button Styles
+.btn-primary {
+  background: linear-gradient(135deg, $gradient-start 0%, $gradient-end 100%);
+  border: none;
+  padding: 0.6rem 1.5rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(67, 97, 238, 0.2);
+  }
+}
+
+// Loading State
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
 }
