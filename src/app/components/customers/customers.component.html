@@ -18,6 +18,7 @@
 <!-- Customer List -->
 <ul>
   <li *ngFor="let customer of customers">
+    <input [(ngModel)]="customer.id" placeholder="Name">
     <input [(ngModel)]="customer.name" placeholder="Name">
     <input [(ngModel)]="customer.email" placeholder="Email">
     <input [(ngModel)]="customer.phno" placeholder="Phone">

@@ -2,24 +2,17 @@
   "customers": [
     {
       "id": "1",
-      "name": "John Doeeee",
-      "email": "john@example.com",
-      "phno": "1234567890",
+      "name": "aaa",
+      "email": "aaaaaaa",
+      "phno": "11111111",
       "gender": "male"
     },
     {
       "id": "2",
-      "name": "Jane Doeww",
-      "email": "jane@example.com",
-      "phno": "0987654321",
+      "name": "bbbb",
+      "email": "bbbbbbbbb",
+      "phno": "22222222",
       "gender": "female"
-    },
-    {
-      "id": "3",
-      "name": "aaa",
-      "email": "aaaa",
-      "phno": "1111",
-      "gender": "male"
     }
   ]
 }
