@@ -15,21 +15,7 @@
       "gender": "female"
     },
     {
-      "id": 0,
-      "name": "Vaishnavi",
-      "email": "vaishnavi@abc.com",
-      "phno": "111122222",
-      "gender": "female"
-    },
-    {
-      "id": 0,
-      "name": "varsha",
-      "email": "varsha@example.com",
-      "phno": "1122112211",
-      "gender": "female"
-    },
-    {
-      "id": 3,
+      "id": "3",
       "name": "aaa",
       "email": "aaaa",
       "phno": "1111",
