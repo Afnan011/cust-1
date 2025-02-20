@@ -20,7 +20,6 @@ export class CustomersComponent implements OnInit{
 
   ngOnInit(): void {
     this.fetchCustomers();
-    
   }
   
   fetchCustomers(): void {
@@ -32,11 +31,8 @@ export class CustomersComponent implements OnInit{
   
   addCustomer(): void {
     if (!this.newCustomer.name || !this.newCustomer.email || !this.newCustomer.phno) return;
-    // Dynamically generate the ID based on the current customers length
     const newId = this.customers.length > 0 ? Math.max(...this.customers.map(c => c.id)) + 1 : 1;
-    // Assign the new customer ID
     this.newCustomer.id = newId.toString();
-    
     this.customerService.addCustomer(this.newCustomer).subscribe({
       next: (data) => {
         this.customers.push(data);
@@ -68,5 +64,4 @@ export class CustomersComponent implements OnInit{
     });
   }
   
-
 }
