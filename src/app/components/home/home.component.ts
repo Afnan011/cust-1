@@ -1,48 +1,46 @@
 import { Component } from '@angular/core';
-import { HomeService } from './home.service';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { Customer } from './customer/customer.interface';
+import { AppState } from '../../store/app.state';
+import * as CustomerActions from '../../store/customer.actions';
+import { selectAllCustomers, selectLoading } from '../../store/customer.selectors';
 import { CommonModule } from '@angular/common';
 import { NewCustomerComponent } from './customer/new-customer/new-customer.component';
 import { CustomerComponent } from './customer/customer.component';
+import { deleteCustomer } from '../../store/customer.actions';
 
 @Component({
   selector: 'app-home',
   imports: [CommonModule, CustomerComponent, NewCustomerComponent],
+  standalone: true,
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+  customers$: Observable<Customer[]>;
+  loading$: Observable<boolean>;
 
-  customers: any[] = [];
-  
-  constructor(private homeService: HomeService) {
-    this.loadCustomers();
-  }
-  
-  loadCustomers() {
-    this.homeService.getCustomers().subscribe((data) => {
-      this.customers = data;
-    });
-  }
-
-  onCustomerCreated(newCustomer: any) {
-    this.customers.push(newCustomer);
+  constructor(private store: Store<AppState>) {
+    this.customers$ = this.store.select(selectAllCustomers);
+    this.loading$ = this.store.select(selectLoading);
+    this.store.dispatch(CustomerActions.loadCustomers());
   }
 
   onCustomerDeleted(id: string) {
-    this.customers = this.customers.filter(customer => customer.id !== id);
+    this.store.dispatch(deleteCustomer({ id }));
   }
 
-  onCustomerUpdated(updatedCustomer: any) {
-    this.customers = this.customers.map(customer => 
-      customer.id === updatedCustomer.id ? updatedCustomer : customer
-    );
+  onCustomerCreated(newCustomer: Customer) {
+    this.store.dispatch(CustomerActions.createCustomer({ customer: newCustomer }));
+  }
+
+  onCustomerUpdated(updatedCustomer: Customer) {
+    this.store.dispatch(CustomerActions.updateCustomer({ customer: updatedCustomer }));
   }
 
   getCustomerById(id: number) {
-    console.log(this.customers);
-    this.homeService.getCustomerById(id).subscribe((data) => {
-      console.log(data);
-    });
+    console.log(this.customers$);
+    this.store.dispatch(CustomerActions.getCustomerById({ id }));
   }
-
 }

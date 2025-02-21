@@ -1,8 +1,11 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CustomerModalComponent } from './customer-modal/customer-modal.component';
-import { HomeService } from '../home.service';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../store/app.state';
+import { deleteCustomer, updateCustomer } from '../../../store/customer.actions';
 import { Customer } from './customer.interface';
+import * as CustomerActions from '../../../store/customer.actions';
 
 @Component({
   selector: 'app-customer',
@@ -14,40 +17,27 @@ import { Customer } from './customer.interface';
 export class CustomerComponent {
   @Input() customer!: Customer;
   @Output() customerDeleted = new EventEmitter<string>();
-  @Output() customerUpdated = new EventEmitter<Customer>();
 
-  constructor(private homeService: HomeService) {}
+  constructor(private store: Store<AppState>) {}
 
   updateCustomer(formData: Partial<Customer>) {
-    this.homeService.updateCustomer(this.customer.id, formData).subscribe({
-      next: (updatedCustomer) => {
-        this.customerUpdated.emit(updatedCustomer);
-        this.closeModal(this.customer.id);
-      },
-      error: (error) => {
-        console.error('Error updating customer:', error);
-      }
-    });
+    const updatedCustomer = { ...this.customer, ...formData };
+    this.store.dispatch(CustomerActions.updateCustomer({ customer: updatedCustomer }));
+    this.closeModal(this.customer.id);
   }
 
-  deleteCustomer(id: string) {
-    if (confirm('Are you sure you want to delete this customer?')) {
-      this.homeService.deleteCustomer(id).subscribe({
-        next: () => {
-          this.customerDeleted.emit(id);
-        },
-        error: (error) => {
-          console.error('Error deleting customer:', error);
-        }
-      });
+  deleteCustomer() {
+    if (confirm('Are you sure?')) {
+      this.customerDeleted.emit(this.customer.id);
     }
   }
 
-  private closeModal(id: string) {
-    const modal = document.getElementById('updateCustomerModal' + id);
-    if (modal) {
-      const modalInstance = (window as any).bootstrap.Modal.getInstance(modal);
-      modalInstance?.hide();
+  closeModal(id: string) {
+    // Close modal using vanilla JavaScript
+    const modalElement = document.getElementById('updateCustomerModal' + id);
+    if (modalElement) {
+      const modal = bootstrap.Modal.getInstance(modalElement);
+      modal?.hide();
     }
   }
 }

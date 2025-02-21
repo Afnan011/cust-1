@@ -16,24 +16,34 @@
 
 <div class="container">
   <div class="row g-4">
-    @if (customers.length === 0) {
-      <div class="col-12">
-        <div class="alert alert-info text-center p-5 rounded-3">
-          <i class="bi bi-people fs-1 mb-3 d-block"></i>
-          <h4>No Customers Yet</h4>
-          <p class="mb-0 text-muted">Add your first customer to get started!</p>
+    <ng-container *ngIf="loading$ | async; else content">
+      <div class="col-12 text-center">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
         </div>
       </div>
-    }
-    @for (customer of customers; track customer.id) {
-      <div class="col-md-6 col-lg-4">
-        <app-customer 
-          [customer]="customer" 
-          (customerDeleted)="onCustomerDeleted($event)"
-          (customerUpdated)="onCustomerUpdated($event)"
-        />
-      </div>
-    }
+    </ng-container>
+
+    <ng-template #content>
+      <ng-container *ngIf="(customers$ | async)?.length === 0; else customerList">
+        <div class="col-12">
+          <div class="alert alert-info text-center p-5 rounded-3">
+            <i class="bi bi-people fs-1 mb-3 d-block"></i>
+            <h4>No Customers Yet</h4>
+            <p class="mb-0 text-muted">Add your first customer to get started!</p>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-template #customerList>
+        <div *ngFor="let customer of customers$ | async" class="col-md-6 col-lg-4">
+          <app-customer 
+            [customer]="customer" 
+            (customerDeleted)="onCustomerDeleted($event)"
+          />
+        </div>
+      </ng-template>
+    </ng-template>
   </div>
 </div>
 

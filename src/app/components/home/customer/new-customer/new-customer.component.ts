@@ -1,31 +1,30 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { CustomerModalComponent } from '../customer-modal/customer-modal.component';
-import { HomeService } from '../../home.service';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../../store/app.state';
+import { createCustomer } from '../../../../store/customer.actions';
 import { Customer } from '../customer.interface';
+import { CustomerModalComponent } from '../customer-modal/customer-modal.component';
 
 @Component({
   selector: 'app-new-customer',
   standalone: true,
-  imports: [CommonModule, CustomerModalComponent],
-  templateUrl: './new-customer.component.html',
-
+  imports: [CustomerModalComponent],
+  templateUrl: './new-customer.component.html'
 })
 export class NewCustomerComponent {
   @Output() customerCreated = new EventEmitter<Customer>();
 
-  constructor(private homeService: HomeService) {}
+  constructor(private store: Store<AppState>) {}
 
   createCustomer(formData: Partial<Customer>) {
-    this.homeService.createCustomer(formData).subscribe({
-      next: (newCustomer) => {
-        this.customerCreated.emit(newCustomer);
-        this.closeModal();
-      },
-      error: (error) => {
-        console.error('Error creating customer:', error);
+    this.store.dispatch(createCustomer({
+      customer: {
+        name: formData.name!,
+        email: formData.email!,
+        phone: formData.phone!
       }
-    });
+    }));
+    this.closeModal();
   }
 
   private closeModal() {
