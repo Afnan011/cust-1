@@ -1,0 +1,98 @@
+// Variables
+$primary-color: #4CAF50;
+$danger-color: #f44336;
+$border-color: #ddd;
+$error-color: #f44336;
+$focus-color: #2196F3;
+
+// Mixins
+@mixin input-base {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+
+  &:focus {
+    outline: none;
+    border-color: $focus-color;
+    box-shadow: 0 0 5px rgba(33, 150, 243, 0.3);
+  }
+}
+
+@mixin button-base {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+
+  &:hover:not(:disabled) {
+    opacity: 0.8;
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+}
+
+.form-container {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input {
+      @include input-base;
+    }
+
+    .error {
+      color: $error-color;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+  }
+
+  .form-actions {
+    margin-top: 30px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+
+    button {
+      @include button-base;
+
+      &[type="submit"] {
+        background-color: $primary-color;
+        color: white;
+      }
+
+      &.cancel-button {
+        background-color: $danger-color;
+        color: white;
+      }
+    }
+  }
+}

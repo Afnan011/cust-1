@@ -1,0 +1,60 @@
+<div class="form-container">
+    <h2>{{ isEditing ? 'Edit' : 'Add' }} Customer</h2>
+    <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="id">ID:</label>
+        <input id="id" formControlName="id" [readonly]="isEditing">
+        <div class="error" *ngIf="customerForm.get('id')?.errors?.['required'] && customerForm.get('id')?.touched">
+          ID is required
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input id="name" formControlName="name">
+        <div class="error" *ngIf="customerForm.get('name')?.errors?.['required'] && customerForm.get('name')?.touched">
+          Name is required
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="age">Age:</label>
+        <input id="age" type="number" formControlName="age">
+        <div class="error" *ngIf="customerForm.get('age')?.errors?.['required'] && customerForm.get('age')?.touched">
+          Age is required
+        </div>
+        <div class="error" *ngIf="customerForm.get('age')?.errors?.['min']">
+          Age must be positive
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="phone">Phone:</label>
+        <input id="phone" formControlName="phone">
+        <div class="error" *ngIf="customerForm.get('phone')?.errors?.['required'] && customerForm.get('phone')?.touched">
+          Phone is required
+        </div>
+        <div class="error" *ngIf="customerForm.get('phone')?.errors?.['pattern']">
+          Phone must be 10 digits
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input id="email" type="email" formControlName="email">
+        <div class="error" *ngIf="customerForm.get('email')?.errors?.['required'] && customerForm.get('email')?.touched">
+          Email is required
+        </div>
+        <div class="error" *ngIf="customerForm.get('email')?.errors?.['email']">
+          Invalid email format
+        </div>
+      </div>
+  
+      <div class="form-actions">
+        <button type="submit" [disabled]="!customerForm.valid">
+          {{ isEditing ? 'Update' : 'Add' }} Customer
+        </button>
+        <button type="button" class="cancel-button" (click)="onCancel()">Cancel</button>
+      </div>
+    </form>
+  </div>
